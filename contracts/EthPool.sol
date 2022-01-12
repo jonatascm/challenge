@@ -13,7 +13,6 @@ contract EthPool is ReentrancyGuard, AccessControl {
     address[] public users;
     
     uint public totalPool;
-    uint public lastRewardDate;
 
     event DepositRewards(uint amount);
     event DepositPool(address user, uint amount);
