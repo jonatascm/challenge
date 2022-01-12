@@ -1,55 +1,70 @@
-# Smart Contract Challenge
+# EthPool - Smart Contract Challenge
 
-## A) Challenge
+## 1. Considerations
 
-### 1) Setup a project and create a contract
+1. The user rewards not auto increment in user's pool.
+2. The user can withdraw only the rewards to restake them.
+3. Minimum deposit of 10.000 wei based on basis point (percentage) calculation.
 
-#### Summary
+<br />
 
-ETHPool provides a service where people can deposit ETH and they will receive weekly rewards. Users must be able to take out their deposits along with their portion of rewards at any time. New rewards are deposited manually into the pool by the ETHPool team each week using a contract function.
+---
 
-#### Requirements
+## 2. How to compile and test:
 
-- Only the team can deposit rewards.
-- Deposited rewards go to the pool of users, not to individual users.
-- Users should be able to withdraw their deposits along with their share of rewards considering the time when they deposited.
+```bash
+  npm install
+  npm run compile
+  npm run test
+```
 
-Example:
+<br />
 
-> Let say we have user **A** and **B** and team **T**.
->
-> **A** deposits 100, and **B** deposits 300 for a total of 400 in the pool. Now **A** has 25% of the pool and **B** has 75%. When **T** deposits 200 rewards, **A** should be able to withdraw 150 and **B** 450.
->
-> What if the following happens? **A** deposits then **T** deposits then **B** deposits then **A** withdraws and finally **B** withdraws.
-> **A** should get their deposit + all the rewards.
-> **B** should only get their deposit because rewards were sent to the pool before they participated.
+---
 
-#### Goal
+## 3. How to deploy to Rinkey network
 
-Design and code a contract for ETHPool, take all the assumptions you need to move forward.
+- Copy .env.example to .env
+- Edit .env file adding:
+  - alchemy api key to RINKEBY_URL
+  - PRIVATE_KEY
 
-You can use any development tools you prefer: Hardhat, Truffle, Brownie, Solidity, Vyper.
+After compile and test execute the following command:
 
-Useful resources:
+```bash
+  npm run deploy
+```
 
-- Solidity Docs: https://docs.soliditylang.org/en/v0.8.4
-- Educational Resource: https://github.com/austintgriffith/scaffold-eth
-- Project Starter: https://github.com/abarmat/solidity-starter
+<br />
 
-### 2) Write tests
+---
 
-Make sure that all your code is tested properly
+## 4. Deployed Contract Address to Rinkeby
 
-### 3) Deploy your contract
+Address: 0xe0be86d7e544d6D7D007f21C543Da1ce4F6bF748
 
-Deploy the contract to any Ethereum testnet of your preference. Keep record of the deployed address.
+Verified in Etherscan: https://rinkeby.etherscan.io/address/0xe0be86d7e544d6D7D007f21C543Da1ce4F6bF748#code
 
-Bonus:
+<br />
 
-- Verify the contract in Etherscan
+---
 
-### 4) Interact with the contract
+## 5. Run script to get total amount of ETH held in the contract
 
-Create a script (or a Hardhat task) to query the total amount of ETH held in the contract.
+Replace the deployed contract address to .env file in DEPLOYED_CONTRACT_ADDRESS, then run the command:
 
-_You can use any library you prefer: Ethers.js, Web3.js, Web3.py, eth-brownie_
+```bash
+  npm run get-contract-eth
+```
+
+<br />
+
+---
+
+## 6. Verify the contract in Etherscan
+
+To verify deployed contract update .env file with etherscan api key in variable ETHERSCAN_KEY, then run the following command:
+
+```bash
+  npx hardhat verify CONTRACT_ADDRESS --network rinkeby
+```
